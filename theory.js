@@ -56,3 +56,50 @@ boundFunc1(); // 1
 
 boundFunc2(); // 1, так как повторный bind не изменяет контекст
 
+// 'use strict';
+// function myFunction() {
+//     console.log(this);
+// };
+// myFunction();
+
+const item = {
+    title: "Phone",
+    fullPrice: 100,
+    calculatePrice(discount = 0) {
+        console.log(this.fullPrice - discount/100 * this.fullPrice);
+    }
+}
+
+item.calculatePrice();
+
+function myFunction() {
+    console.log(this);
+};
+
+const product = {title: "phone", price: 100};
+
+
+function calcDiscount(age){
+    if (age > 65) {
+        console.log(this.price / 2);
+    } else {
+        console.log(this.price)
+    }
+}
+const calcDiscountFor70 = calcDiscount.bind(product, 70);
+calcDiscountFor70();
+
+//конструктор
+function CreateItem(title, price) {
+    this.title = title;
+    this.price = price;
+    //console.log(this);
+    return this;
+}
+
+const item1 = new CreateItem('phone', 1000);
+const item2 = new CreateItem('phone', 5000);
+
+console.log (item1, item2);
+
+
